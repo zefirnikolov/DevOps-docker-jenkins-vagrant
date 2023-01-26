@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile.web
+        ports:
+            - 8080:80
+        networks:
+            - app-network
+        volumes:
+            - "/home/jenkins/BGApp-Pipeline/web:/var/www/html:ro"
+        depends_on:
+            - db
+    db:
+        build:
+            context: .
+            dockerfile: Dockerfile.db
+        networks:
+            - app-network
+        environment:
+            MYSQL_ROOT_PASSWORD: "12345"
+networks:
+    app-network:

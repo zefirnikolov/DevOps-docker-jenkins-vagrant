@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+    web:
+        image: zefirnikolov/web-pipeline
+        ports:
+            - 80:80
+        volumes:
+            - "/home/jenkins/BGApp-Pipeline/web:/var/www/html:ro"
+        networks:
+            - app-network
+    db:
+        image: zefirnikolov/db-pipeline
+        networks:
+            - app-network
+        environment:
+            MYSQL_ROOT_PASSWORD: "12345"
+networks:
+    app-network:

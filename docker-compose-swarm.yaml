@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+    web:
+        image: zefirnikolov/bgapp-web
+        deploy:
+            replicas: 5
+        ports:
+            - 8080:80
+        volumes:
+            - "/home/vagrant/demodevopsapp/web:/var/www/html:ro"
+        networks:
+            - app-network
+    db:
+        image: zefirnikolov/bgapp-db
+        networks:
+            - app-network
+        environment:
+            MYSQL_ROOT_PASSWORD: "12345"
+networks:
+    app-network:
